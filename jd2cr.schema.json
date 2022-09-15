@@ -14,7 +14,7 @@
     },
     "cookies": {
       "title": "Cookie list for the site",
-      "description": "A list of tuples in the form [[\"phpssid\", \"ffffffffffvoirg7ffffffffff\"],[..., ...]...]. Here you can put in your personal cookies e.g. login cookies of websites which JD otherwise fails to parse.Also if \"updateCookies\" is enabled, JD will update these with all cookies it receives from the website(s) that match the \"pattern\" property.",
+      "description": "A list of tuples in the form [[\"cookieName\", \"cookieValue\"],[..., ...]...]. Here you can put in your personal cookies e.g. login cookies of websites which JD otherwise fails to parse.Also if \"updateCookies\" is enabled, JD will update these with all cookies it receives from the website(s) that match the \"pattern\" property.",
       "examples": [[["cookieName", "cookieValue"]]],
       "type": "array",
       "items": {
@@ -66,15 +66,13 @@
       "title": "Define package name and group al crawled urls for the current job under it",
       "description": "Type: HTML RegEx\nApplies to rule: DEEPDECRYPT\nPurpose: All URLs crawled by this rule will be grouped into the same package that is the HTML RegEx's first capture",
       "examples": ["<title>(.*?)</title>"],
-      "type": "string",
-      "format": "regex"
+      "type": "string"
     },
     "passwordPattern": {
       "title": "Pattern to find extraction passwords for downloaded archives",
       "description": "Type: HTML RegEx or null\nApplies to rule: DEEPDECRYPT\nPurpose: Matches against archive extraction password that may be found as text inside the page's (unmodified by javascript) HTML code. First returned capture must be the password.",
       "examples": ["password:([^>]+)>"],
-      "type": "string",
-      "format": "regex"
+      "type": "string"
     },
     "formPattern": {
       "title": "Find (and submit) HTML Form",
