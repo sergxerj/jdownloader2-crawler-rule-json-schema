@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://raw.githubusercontent.com/sergxerj/jdownloader2-crawler-rule-json-schema/main/jd2cr.schema.json",
+  "title": "Jdownloader2 Crawler Rule definition (single-rule file)",
+  "description": "A crawler rule.\n - Anything prefixed as \"HTML RegEx\" will do Java-flavored pattern-matching on the page's raw (unmodified by javascript) HTML.",
+  "type": "object",
+  "required": ["enabled", "name", "rule", "pattern"],
+  "additionalProperties": false,
+  "properties": {
+    "enabled": {
+      "title": "ENABLED flag",
+      "description": "Type: Boolean\nApplies to rule: ALL\nPurpose: Enables or disables this rule",
+      "type": "boolean"
+    },
+    "cookies": {
+      "title": "Cookie list for the site",
+      "description": "A list of tuples in the form [[\"phpssid\", \"ffffffffffvoirg7ffffffffff\"],[..., ...]...]. Here you can put in your personal cookies e.g. login cookies of websites which JD otherwise fails to parse.Also if \"updateCookies\" is enabled, JD will update these with all cookies it receives from the website(s) that match the \"pattern\" property.",
+      "examples": [[["cookieName", "cookieValue"]]],
+      "type": "array",
+      "items": {
+        "type": "array",
+        "prefixItems": [
+          {"type": "string"},
+          {"type": "string"}
+        ]
+      }
+    },
+    "updateCookies": {
+      "title": "Updates site cookies",
+      "description": "Type: Boolean\nApplies to rule: ALL\nPurpose: If the target websites returns new cookies, save these inside this rule and update this rule.",
+      "type": "boolean"
+    },
+    "logging": {
+      "title": "Enable logging",
+      "description": "Type: Boolean\nApplies to rule: ALL\nPurpose: Enable this for support purposes. Logs of your LinkCrawler Rules can be found in your JD install dir/logs/: LinkCrawlerRule.<RuleID>.log.0 and /LinkCrawlerDeep.*",
+      "type": "boolean"
+    },
+    "maxDecryptDepth": {
+      "title": "Limits crawling depth",
+      "description": "Type: Integer\nApplies to rule: ALL\nPurpose: How many layers deep do should your rule crawl (e.g. rule returns URLs matching the same rule again recursively - how often is this chain allowed to happen?)",
+      "examples": [1],
+      "type": "integer"
+    },
+    "id": {
+      "title": "Rule ID",
+      "description": "Type: Integer\nApplies to rule: ALL\nPurpose: Auto generated ID of the rule. Normally leave this blank and JD2 will autoinsert.",
+      "type": "integer"
+    },
+    "name": {
+      "title": "Name of the rule",
+      "description": "Type: String\nApplies to rule: ALL\nPurpose: name of the rule.",
+      "type": "string"
+    },
+    "pattern": {
+      "title": "This rule will be used for all URLs matching this pattern",
+      "description": "Type: RegEx\nApplies to rule: ALL\nPurpose: defines on which URLs will this rule apply by matching it to the pattern",
+      "examples": ["https?://www\\.example\\.com/subdir1/subdir2/subdir3"],
+      "type": "string"
+    },
+    "rule": {
+      "title": "Type of the rule",
+      "enum": ["DEEPDECRYPT", "REWRITE", "DIRECTHTTP", "FOLLOWREDIRECT", "SUBMITFORM"],
+      "type": "string"
+    },
+    "packageNamePattern": {
+      "title": "Define package name and group al crawled urls for the current job under it",
+      "description": "Type: HTML RegEx\nApplies to rule: DEEPDECRYPT\nPurpose: All URLs crawled by this rule will be grouped into the same package that is the HTML RegEx's first capture",
+      "examples": ["<title>(.*?)</title>"],
+      "type": "string",
+      "format": "regex"
+    },
+    "passwordPattern": {
+      "title": "Pattern to find extraction passwords for downloaded archives",
+      "description": "Type: HTML RegEx or null\nApplies to rule: DEEPDECRYPT\nPurpose: Matches against archive extraction password that may be found as text inside the page's (unmodified by javascript) HTML code. First returned capture must be the password.",
+      "examples": ["password:([^>]+)>"],
+      "type": "string",
+      "format": "regex"
+    },
+    "formPattern": {
+      "title": "Find (and submit) HTML Form",
+      "description": "Type: HTML RegEx\nApplies to rule: DEEPDECRYPT\nPurpose:",
+      "examples": ["<form id=\"example\">(.*?)</form>"],
+      "type": "string"
+    },
+    "deepPattern": {     
+      "title": "URLs to look for inside the page.", 
+      "description": "- Type: HTML RegEx or null\n- Applies to rule: DEEPDECRYPT\n- Purpose: Which URLs should this rule look for inside the page's (unmodified by javascript) HTML code. null (or blank) = auto scan and return all supported URLs found in HTML code.\nKeep in mind that, if the url's found in the html are relative (e.g. starting with a slash / character instead of a protocol like http or a domain (website root) name) you WILL have to enclose the entire expression in quotes (outside of the parentheses that do capturing) like \\\"(...)\\\" AND enclose the part that would match the missing part of the url (i.e. from the protocol to the slash-or-other-character it begins with) in a NON CAPTURING group (?:...). Resulting in the following pattern for pretty much every case \\\"((?:missing part of full url)rest of url that is in the html)\\\"",
+      "examples": [
+        "(https?://absolute\\.url\\.example\\.com/subdir1/.*?\\.ext)",
+        "\"((?:https?://missing\\.domain\\.example\\.com\\)?/partial_url_existing_in_page)\""
+      ],
+      "oneOf": [
+        {"type": "string"},
+        {"type": "null"}
+      ]
+    },
+    "rewriteReplaceWith": {
+      "title": "Pattern for new URL",
+      "description": "Type: String\nApplies to rule: REWRITE\nPurpose:Pattern for new URL, can use captures from \"pattern\" in the $1 form",
+      "examples": ["https://example.com/$1"],
+      "type": "string"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "$comment": "Check if rule is not DEEPDECRYPT and disallow deepPattern. packageNamePattern and passwordPattern being non-null",
+        "properties": { "rule": { "not": { "const": "DEEPDECRYPT" } }
+        }
+      },
+      "then": {
+        "properties": {
+          "deepPattern": { "type": "null" } ,
+          "packageNamePattern": { "type": "null" } ,
+          "passwordPattern": { "type": "null" }
+        }
+      }
+    },
+    {
+      "if": {
+        "$comment": "Check if rule is not REWRITE and disallow rewriteReplaceWith being non-null",
+        "properties": { "rule": { "not": { "const": "REWRITE" } }
+        }
+      },
+      "then": {
+        "properties": { "rewriteReplaceWith": { "type": "null" } }
+      }
+    },
+    {
+      "if": {
+        "$comment": "Check if rule is not DIRECTHTTP, DEEPDECRYPT, SUBMITFORM or FOLLOWREDIRECT and disallow updateCookies being non-null",
+        "properties": { "rule": { "not": { "oneOf" : [ { "const": "DIRECTHTTP" }, { "const": "DEEPDECRYPT" }, { "const": "SUBMITFORM" }, { "const": "FOLLOWREDIRECT" }] } } }
+      },
+      "then": {
+        "properties": { "updateCookies": { "type": "null" } }
+      }
+    },
+    {
+      "if": {
+        "$comment": "Check if rule is not DIRECTHTTP, DEEPDECRYPT, SUBMITFORM or FOLLOWREDIRECT and disallow cookies being non-null",
+        "properties": { "rule": { "not": { "oneOf" : [ { "const": "DIRECTHTTP" }, { "const": "DEEPDECRYPT" }, { "const": "SUBMITFORM" }, { "const": "FOLLOWREDIRECT" }] } } }
+      },
+      "then": {
+        "properties": { "cookies": { "type": "null" } }
+      }
+    }
+  ]
+}
