@@ -1,0 +1,18 @@
+[
+	{
+		"enabled": true,
+		"rule": "DEEPDECRYPT",
+		"name": "",
+		"pattern": ""
+	},
+	{
+	"enabled": true,
+	"rule": "DEEPDECRYPT",
+	"name": "",
+	"pattern": "",
+	"deepPattern":  "(https?://absolute\\.url\\.example\\.com/subdir1/.*?\\.ext)",
+	"passwordPattern": "password:([^>]+)>",
+	"packageNamePattern": "<title>(.*?)</title>"
+
+	}
+]

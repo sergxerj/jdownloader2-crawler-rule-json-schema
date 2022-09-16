@@ -1,0 +1,15 @@
+[
+	{
+		"enabled": true,
+		"rule": "DEEPDECRYPT",
+		"name": "",
+		"pattern": ""
+	},
+	{
+	"enabled": true,
+	"rule": "DEEPDECRYPT",
+	"name": "",
+	"pattern": ""
+
+	}
+]

@@ -1,0 +1,16 @@
+[
+	{
+		"enabled": true,
+		"rule": "DEEPDECRYPT",
+		"name": "",
+		"pattern": ""
+	},
+	{
+	"enabled": true,
+	"rule": "DIRECTHTTP",
+	"name": "",
+	"pattern": "",
+	"rewriteReplaceWith": ""
+
+	}
+]

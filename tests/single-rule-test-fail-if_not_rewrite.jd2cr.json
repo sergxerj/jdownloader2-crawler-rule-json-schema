@@ -1,0 +1,7 @@
+{
+	"enabled": true,
+	"rule": "DIRECTHTTP",
+	"name": "",
+	"pattern": "",
+	"rewriteReplaceWith": ""
+}

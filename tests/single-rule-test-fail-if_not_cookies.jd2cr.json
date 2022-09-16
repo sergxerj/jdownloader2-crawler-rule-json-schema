@@ -1,0 +1,8 @@
+{
+	"enabled": true,
+	"rule": "REWRITE",
+	"name": "",
+	"pattern": "",
+	"cookies": [["",""]],
+	"updateCookies": true
+}
