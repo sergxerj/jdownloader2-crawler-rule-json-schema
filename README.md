@@ -15,5 +15,5 @@ A json schema validator for jdownloader2 linkcrawler rules.
 
 ### Tips
 
-- Use a regex tool, preferably https://regex101.com/ with the Java 8 engine to test your matches.
+- Use a regex tool, preferably https://regex101.com/ with the Java 8 flavor to test your matches.
 - To look for urls in the page (for HTML RegEx matching) use View Page Source. If you don't know how to do that, ask Mr. Google "view raw html in {your-browser's-name}", he is your friend ;-).
