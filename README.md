@@ -6,7 +6,7 @@ A json schema validator for jdownloader2 linkcrawler rules.
 
 - `jd2cr.schema.json` [(direct link)](https://raw.githubusercontent.com/sergxerj/jdownloader2-crawler-rule-json-schema/main/jd2cr.schema.json) for validating a single rule.
 - `jd2mcr.schema.json` [(direct link)](https://raw.githubusercontent.com/sergxerj/jdownloader2-crawler-rule-json-schema/main/jd2mcr.schema.json) for validating an array of rules. This is the format that you can "Ctrl+A, Ctrl+V" in the current JD2 version as of latest commit.
-- included in `.vscode` directory there's a settings.json file that will match and apply `jd2cr.schema.json` to `*.jd2cr`/`*.jd2cr.json` files, and `jd2mcr.schema.json` to `*.jd2mcr`/`*.jd2mcr.json` files within the project folder. So you can copy this repo and work entirely offline in vscode on your own rules.
+- included in `.vscode` directory there's a settings.json file that will match and apply `jd2cr.schema.json` to `*.jd2cr`/`*.jd2cr.json`/`*.linkcrawlerrules.json` files, and `jd2mcr.schema.json` to `*.jd2mcr`/`*.jd2mcr.json` files within the project folder. So you can copy this repo and work entirely offline in vscode on your own rules.
 
 ### Perks
 
