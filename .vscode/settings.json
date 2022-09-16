@@ -1,15 +1,11 @@
 {
 	"json.schemas": [
 	{
-		"fileMatch": [
-			"*.jd2cr.json"
-		],
+		"fileMatch": ["*.jd2cr","*.jd2cr.json"],
 		"url": "/jd2cr.schema.json"
 	},
 	{
-		"fileMatch": [
-			"*.jd2mcr.json"
-		],
+		"fileMatch": ["*.jd2mcr","*.jd2mcr.json"],
 		"url": "/multi-jd2cr.schema.json"
 	}
 	]
