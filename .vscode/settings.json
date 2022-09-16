@@ -5,7 +5,7 @@
 		"url": "/jd2cr.schema.json"
 	},
 	{
-		"fileMatch": ["*.jd2mcr","*.jd2mcr.json"],
+		"fileMatch": ["*.jd2mcr","*.jd2mcr.json", "*.linkcrawlerrules.json"],
 		"url": "/multi-jd2cr.schema.json"
 	}
 	]
