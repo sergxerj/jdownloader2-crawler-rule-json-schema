@@ -14,7 +14,7 @@
     },
     "cookies": {
       "title": "Cookie list for the site",
-      "description": "A list of tuples in the form [[\"cookieName\", \"cookieValue\"],[..., ...]...]. Here you can put in your personal cookies e.g. login cookies of websites which JD otherwise fails to parse.Also if \"updateCookies\" is enabled, JD will update these with all cookies it receives from the website(s) that match the \"pattern\" property.",
+      "description": "- Type: Array of length-2 Arrays\n- Applies to rule: DIRECTHTTP, DEEPDECRYPT, SUBMITFORM or FOLLOWREDIRECT\n- Purpose: A list of length-2 arrays in the form [[\"cookieName\", \"cookieValue\"],[..., ...]...]. Here you can put in your personal cookies e.g. login cookies of websites which JD otherwise fails to parse.Also if \"updateCookies\" is enabled, JD will update these with all cookies it receives from the website(s) that match the \"pattern\" property.",
       "examples": [[["cookieName", "cookieValue"]]],
       "type": "array",
       "items": {
@@ -27,7 +27,7 @@
     },
     "updateCookies": {
       "title": "Updates site cookies",
-      "description": "- Type: Boolean\n- Applies to rule: ALL\n- Purpose: If the target websites returns new cookies, save these inside this rule and update this rule.",
+      "description": "- Type: Boolean\n- Applies to rule: DIRECTHTTP, DEEPDECRYPT, SUBMITFORM or FOLLOWREDIRECT\n- Purpose: If the target websites returns new cookies, save these inside this rule and update this rule.",
       "type": "boolean"
     },
     "logging": {
@@ -130,16 +130,10 @@
         "properties": { "rule": { "not": { "oneOf" : [ { "const": "DIRECTHTTP" }, { "const": "DEEPDECRYPT" }, { "const": "SUBMITFORM" }, { "const": "FOLLOWREDIRECT" }] } } }
       },
       "then": {
-        "properties": { "updateCookies": { "type": "null" } }
-      }
-    },
-    {
-      "if": {
-        "$comment": "Check if rule is not DIRECTHTTP, DEEPDECRYPT, SUBMITFORM or FOLLOWREDIRECT and disallow cookies being non-null",
-        "properties": { "rule": { "not": { "oneOf" : [ { "const": "DIRECTHTTP" }, { "const": "DEEPDECRYPT" }, { "const": "SUBMITFORM" }, { "const": "FOLLOWREDIRECT" }] } } }
-      },
-      "then": {
-        "properties": { "cookies": { "type": "null" } }
+        "properties": { 
+          "updateCookies": { "type": "null" },
+          "cookies": { "type": "null" }
+        }
       }
     }
   ]
