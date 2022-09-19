@@ -55,7 +55,8 @@
       "title": "This rule will be used for all URLs matching this pattern",
       "description": "- Type: RegEx\n- Applies to rule: ALL\n- Purpose: defines on which URLs will this rule apply by matching it to the pattern",
       "examples": ["https?://www\\.example\\.com/subdir1/subdir2/subdir3"],
-      "type": "string"
+      "type": "string",
+      "format": "regex"
     },
     "rule": {
       "title": "Type of the rule",
@@ -66,23 +67,26 @@
       "title": "Define package name and group al crawled urls for the current job under it",
       "description": "- Type: HTML RegEx\n- Applies to rule: DEEPDECRYPT\n- Purpose: All URLs crawled by this rule will be grouped into the same package that is the HTML RegEx's first capture",
       "examples": ["<title>(.*?)</title>"],
-      "type": "string"
+      "type": "string",
+      "format": "regex"
     },
     "passwordPattern": {
       "title": "Pattern to find extraction passwords for downloaded archives",
       "description": "- Type: HTML RegEx or null\n- Applies to rule: DEEPDECRYPT\n- Purpose: Matches against archive extraction password that may be found as text inside the page's (unmodified by javascript) HTML code. First returned capture must be the password.",
       "examples": ["password:([^>]+)>"],
-      "type": "string"
+      "type": "string",
+      "format": "regex"
     },
     "formPattern": {
       "title": "Find (and submit) HTML Form",
       "description": "- Type: HTML RegEx\n- Applies to rule: DEEPDECRYPT\n- Purpose:",
       "examples": ["<form id=\"example\">(.*?)</form>"],
-      "type": "string"
+      "type": "string",
+      "format": "regex"
     },
     "deepPattern": {     
       "title": "URLs to look for inside the page.", 
-      "description": "- Type: HTML RegEx or null\n- Applies to rule: DEEPDECRYPT\n- Purpose: Which URLs should this rule look for inside the page's (unmodified by javascript) HTML code. null (or blank) = auto scan and return all supported URLs found in HTML code.\nKeep in mind that, if the url's found in the html are relative (e.g. starting with a slash / character instead of a protocol like http or a domain (website root) name) you WILL have to enclose the entire expression in quotes (outside of the parentheses that do capturing) like \\\"(...)\\\" AND enclose the part that would match the missing part of the url (i.e. from the protocol to the slash-or-other-character it begins with) in a NON CAPTURING group (?:...). Resulting in the following pattern for pretty much every case \\\"((?:missing part of full url)rest of url that is in the html)\\\"",
+      "description": "- Type: HTML RegEx or null\n- Applies to rule: DEEPDECRYPT\n- Purpose: Which URLs should this rule look for inside the page's (unmodified by javascript) HTML code. null (or blank) = auto scan and return all supported URLs found in HTML code.\nKeep in mind that, if the url's found in the html are relative (e.g. starting with a slash / character instead of a protocol like http or a domain (website root) name) you WILL have to enclose the entire expression in quotes (outside of the parentheses that do capturing) like \\\"(...)\\\" AND enclose the part that would match the missing part of the url (i.e. from the protocol to the slash-or-other-character it begins with) in an 'OPTIONAL, NON CAPTURING' group (?:...)?. Resulting in the following pattern for pretty much every case \\\"((?:missing part of full url)?rest of url that is in the html)\\\"",
       "examples": [
         "(https?://absolute\\.url\\.example\\.com/subdir1/.*?\\.ext)",
         "\"((?:https?://missing\\.domain\\.example\\.com\\)?/partial_url_existing_in_page)\""
@@ -90,13 +94,15 @@
       "oneOf": [
         {"type": "string"},
         {"type": "null"}
-      ]
+      ],
+      "format": "regex"
     },
     "rewriteReplaceWith": {
       "title": "Pattern for new URL",
       "description": "- Type: String\n- Applies to rule: REWRITE\n- Purpose:Pattern for new URL, can use captures from \"pattern\" in the $1 form",
       "examples": ["https://example.com/$1"],
-      "type": "string"
+      "type": "string",
+      "format": "regex"
     }
   },
   "allOf": [
