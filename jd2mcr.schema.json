@@ -21,7 +21,7 @@
 				"type": "array",
 				"items": {
 					"type": "array",
-					"prefixItems": [
+					"items": [
 						{"type": "string"},
 						{"type": "string"}
 					]
