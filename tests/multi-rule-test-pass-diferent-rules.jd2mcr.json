@@ -1,9 +1,10 @@
 [
 	{
 		"enabled": true,
-		"rule": "DEEPDECRYPT",
+		"rule": "REWRITE",
 		"name": "",
-		"pattern": ""
+		"pattern": "",
+		"rewriteReplaceWith": "https://example.com/$1"
 	},
 	{
 		"enabled": true,
