@@ -1,0 +1,8 @@
+{
+	"enabled": true,
+	"rule": "DIRECTHTTP",
+	"name": "",
+	"pattern": "",
+	"cookies": [["",2]],
+	"updateCookies": true
+}
